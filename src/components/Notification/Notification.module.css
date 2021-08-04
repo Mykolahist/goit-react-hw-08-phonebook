@@ -1,0 +1,22 @@
+.thumb {
+  position: absolute;
+  top: 120px;
+  right: 15px;
+  width: 50%;
+
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: rgb(253, 50, 50);
+}
+
+.message {
+  padding: 25px;
+  text-align: center;
+  color: #fff;
+}
+
+@media screen and (min-width: 1200px) {
+  .message {
+    font-size: 22px;
+  }
+}

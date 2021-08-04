@@ -1,0 +1,32 @@
+.avatar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .avatar {
+    display: block;
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 35px;
+  }
+}
+
+.user {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .user {
+    display: block;
+    margin-right: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user {
+    font-size: 18px;
+  }
+}

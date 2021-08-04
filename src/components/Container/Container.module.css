@@ -1,0 +1,36 @@
+.layout {
+  padding: 25px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  background-image: url(/src/pages/HomePage/bg-img.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.container {
+  width: 350px;
+  padding: 0 25px;
+  overflow: hidden;
+
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 600px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 900px;
+  }
+}
