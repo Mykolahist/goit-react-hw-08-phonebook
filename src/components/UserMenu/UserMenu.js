@@ -1,27 +1,27 @@
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-
 import { authSelectors, authOperations } from '../../redux/auth';
-import defaultAvatar from './default-avatar.png';
-import styles from './UserMenu.module.css';
+import style from './UserMenu.module.css';
 
-const UserMenu = ({ avatar, userName, onLogout }) => (
-  <>
-    <img src={avatar} alt="avatar" className={styles.avatar} width="35" />
-    <span className={styles.user}>Welcome, {userName}</span>
-    <Button variant="contained" onClick={onLogout} size="small">
-      Logout
-    </Button>
-  </>
-);
+function UserMenu({ userName, onLogout, token }) {
+  const handelClick = () => {
+    onLogout(token);
+  };
 
-const mapStateToProps = state => ({
-  userName: authSelectors.getUserName(state),
-  avatar: defaultAvatar,
-});
+  return (
+    <div className={style.nav}>
+      <span>User: {userName}</span>
+      <button onClick={handelClick}>Exit</button>
+    </div>
+  );
+}
 
-const mapDispatchToProps = {
+const mapDispatchTOProps = {
   onLogout: authOperations.logout,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+const mapStateToProps = state => ({
+  userName: authSelectors.getUsername(state),
+  token: authSelectors.getIsAuthenticated(state),
+});
+
+export default connect(mapStateToProps, mapDispatchTOProps)(UserMenu);

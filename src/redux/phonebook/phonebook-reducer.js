@@ -1,29 +1,31 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  fetchContactsRequest,
-  fetchContactsSuccess,
-  fetchContactsError,
+  fetchContactRequest,
+  fetchContactSuccess,
+  fetchContactError,
   addContactRequest,
   addContactSuccess,
   addContactError,
-  deleteContactRequest,
+  findContacts,
   deleteContactSuccess,
+  deleteContactRequest,
   deleteContactError,
-  changeFilter,
 } from './phonebook-actions';
 
-const contacts = createReducer([], {
-  [fetchContactsSuccess]: (_, { payload }) => payload,
-  [addContactSuccess]: (state, { payload }) => [payload, ...state],
-  [deleteContactSuccess]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
+const initialState = [];
+
+const contactReducer = createReducer(initialState, {
+  [fetchContactSuccess]: (state, { payload }) => payload,
+  [addContactSuccess]: (state, action) => [...state, action.payload],
+  [deleteContactSuccess]: (state, action) =>
+    state.filter(({ id }) => id !== action.payload),
 });
 
-const loading = createReducer(false, {
-  [fetchContactsRequest]: () => true,
-  [fetchContactsSuccess]: () => false,
-  [fetchContactsError]: () => false,
+const loadingReducer = createReducer(false, {
+  [fetchContactRequest]: () => true,
+  [fetchContactSuccess]: () => false,
+  [fetchContactError]: () => false,
   [addContactRequest]: () => true,
   [addContactSuccess]: () => false,
   [addContactError]: () => false,
@@ -32,19 +34,35 @@ const loading = createReducer(false, {
   [deleteContactError]: () => false,
 });
 
-const filter = createReducer('', {
-  [changeFilter]: (_, { payload }) => payload,
+const filterReducer = createReducer('', {
+  [findContacts]: (_, action) => action.payload,
 });
 
-const error = createReducer(null, {
-  [fetchContactsError]: (_, { payload }) => payload,
-  [addContactError]: (_, { payload }) => payload,
-  [deleteContactError]: (_, { payload }) => payload,
-});
+const errorReducer = createReducer(null, {});
 
 export default combineReducers({
-  contacts,
-  filter,
-  loading,
-  error,
+  contacts: contactReducer,
+  filter: filterReducer,
+  loading: loadingReducer,
+  error: errorReducer,
 });
+
+// example
+
+// function contactReducer(state = initialState, {type, payload}) {
+//     switch (type) {
+//         case actionTypes.ADD_CONTACT:
+//             return [...state, payload];
+//         case actionTypes.DEL_CONTACT:
+//             return state.filter(({id}) => id !== payload)
+//         default: return state;
+//     }
+// }
+
+// function filterReducer(state = '', action) {
+//     switch (action.type) {
+//         case actionTypes.FILTER_CONTACT:
+//             return action.payload
+//         default: return state;
+//     }
+// }

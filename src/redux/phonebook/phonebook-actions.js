@@ -1,23 +1,24 @@
+// import { v4 as uuidv4 } from "uuid";
 import { createAction } from '@reduxjs/toolkit';
 
-export const fetchContactsRequest = createAction(
-  'contact/fetchContactsRequest',
+export const fetchContactRequest = createAction(
+  'phonebook/fetchContactRequest',
 );
-export const fetchContactsSuccess = createAction(
-  'contact/fetchContactsSuccess',
+export const fetchContactSuccess = createAction(
+  'phonebook/fetchContactSuccess',
 );
-export const fetchContactsError = createAction('contact/fetchContactsError');
+export const fetchContactError = createAction('phonebook/fetchContactError');
 
-export const addContactRequest = createAction('contact/addContactRequest');
-export const addContactSuccess = createAction('contact/addContactSuccess');
-export const addContactError = createAction('contact/addContactError');
+export const addContactRequest = createAction('phonebook/addContactRequest');
+export const addContactSuccess = createAction('phonebook/addContactSuccess');
+export const addContactError = createAction('phonebook/addContactError');
 
 export const deleteContactRequest = createAction(
-  'contact/deleteContactRequest',
+  'phonebook/deleteContactRequest',
 );
 export const deleteContactSuccess = createAction(
-  'contact/deleteContactSuccess',
+  'phonebook/deleteContactSuccess',
 );
-export const deleteContactError = createAction('contact/deleteContactError');
+export const deleteContactError = createAction('phonebook/deleteContactError');
 
-export const changeFilter = createAction('contact/changeFilter');
+export const findContacts = createAction('phonebook/find');

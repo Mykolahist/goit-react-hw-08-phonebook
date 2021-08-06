@@ -1,0 +1,13 @@
+.list {
+  width: 300px;
+}
+
+.item {
+  display: flex;
+  margin-top: 5px;
+}
+
+.list__button {
+  margin-right: 0;
+  margin-left: auto;
+}

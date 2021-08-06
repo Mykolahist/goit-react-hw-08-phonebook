@@ -1,0 +1,15 @@
+.form {
+  width: 480px;
+  padding: 50px;
+
+  border: 1px solid black;
+}
+
+.form__item {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form__input {
+  margin-left: 5px;
+}

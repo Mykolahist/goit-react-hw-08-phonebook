@@ -1,7 +1,6 @@
 import axios from 'axios';
-import authActions from './auth-actions';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+import actions from './auth-actions';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
   set(token) {
@@ -12,42 +11,42 @@ const token = {
   },
 };
 
-const register = data => async dispatch => {
-  dispatch(authActions.registerRequest());
+const register = credentials => async dispatch => {
+  dispatch(actions.registerRequest());
 
   try {
-    const response = await axios.post('/users/signup', data);
+    const response = await axios.post('/users/signup', credentials);
 
     token.set(response.data.token);
-    dispatch(authActions.registerSuccess(response.data));
+    dispatch(actions.registerSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.registerError(error.message));
+    dispatch(actions.registerError(error.message));
   }
 };
 
-const login = data => async dispatch => {
-  dispatch(authActions.loginRequest());
+const login = credentials => async dispatch => {
+  dispatch(actions.loginRequest);
 
   try {
-    const response = await axios.post('/users/login', data);
+    const response = await axios.post('users/login', credentials);
 
     token.set(response.data.token);
-    dispatch(authActions.loginSuccess(response.data));
+    dispatch(actions.loginSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.loginError(error.message));
+    dispatch(actions.logoutError(error.message));
   }
 };
 
 const logout = () => async dispatch => {
-  dispatch(authActions.logoutRequest());
+  dispatch(actions.logoutRequest);
 
   try {
-    await axios.post('/users/logout');
+    await axios.post('users/logout');
 
     token.unset();
-    dispatch(authActions.logoutSuccess());
+    dispatch(actions.logoutSuccess());
   } catch (error) {
-    dispatch(authActions.logoutError(error.message));
+    dispatch(actions.logoutError(error.message));
   }
 };
 
@@ -61,13 +60,14 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 
   token.set(persistedToken);
-  dispatch(authActions.getCurrentUserRequest());
+  dispatch(actions.getCurrentUserRequest());
 
   try {
-    const response = await axios.get('/users/current');
-    dispatch(authActions.getCurrentUserSuccess(response.data));
+    const response = await axios.get('users/current');
+
+    dispatch(actions.getCurrentUserSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.getCurrentUserError(error.message));
+    dispatch(actions.getCurrentUserError(error.massage));
   }
 };
 

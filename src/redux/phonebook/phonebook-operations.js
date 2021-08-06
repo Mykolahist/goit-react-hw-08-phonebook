@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
-  fetchContactsRequest,
-  fetchContactsSuccess,
-  fetchContactsError,
+  fetchContactRequest,
+  fetchContactSuccess,
+  fetchContactError,
   addContactRequest,
   addContactSuccess,
   addContactError,
@@ -11,20 +11,23 @@ import {
   deleteContactError,
 } from './phonebook-actions';
 
+// axios.default.baseURL = 'http://localhost:4040';
+
 const fetchContacts = () => dispatch => {
-  dispatch(fetchContactsRequest());
+  dispatch(fetchContactRequest());
 
   axios
     .get('/contacts')
-    .then(({ data }) => dispatch(fetchContactsSuccess(data)))
-    .catch(error => dispatch(fetchContactsError(error.message)));
+    .then(({ data }) => dispatch(fetchContactSuccess(data)))
+    .catch(error => dispatch(fetchContactError(error.message)));
 };
 
 const addContact = contact => dispatch => {
+  const newContact = { name: contact.name, number: contact.number };
   dispatch(addContactRequest());
 
   axios
-    .post('/contacts', contact)
+    .post('/contacts', newContact)
     .then(({ data }) => dispatch(addContactSuccess(data)))
     .catch(error => dispatch(addContactError(error.message)));
 };
